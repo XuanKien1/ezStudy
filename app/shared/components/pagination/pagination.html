@@ -1,0 +1,11 @@
+<div class="pagination">
+  <button ng-click="$ctrl.onPrev()" ng-disabled="!$ctrl.canPrev()">
+    ← Trang trước
+  </button>
+
+  <span>Trang {{$ctrl.currentPage + 1}} / {{$ctrl.totalPages}}</span>
+
+  <button ng-click="$ctrl.onNext()" ng-disabled="!$ctrl.canNext()">
+    Trang sau →
+  </button>
+</div>

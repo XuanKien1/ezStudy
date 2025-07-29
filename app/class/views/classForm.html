@@ -1,0 +1,49 @@
+<div class="container">
+  <h2 class="mb-4">
+    <i class="fa-solid fa-layer-group"></i>
+    {{ classData.id ? 'Chỉnh sửa lớp học' : 'Thêm lớp học' }}
+  </h2>
+
+  <form name="classForm" ng-submit="save()" novalidate>
+    <div class="mb-3">
+      <label for="grade" class="form-label">Khối:</label>
+      <input
+        type="number"
+        id="grade"
+        name="grade"
+        class="form-control"
+        ng-model="classData.grade"
+        ng-change="validateGrade()"
+        placeholder="Nhập số từ 1–12"
+        min="1" max="12" required
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="suffix" class="form-label">Hậu tố:</label>
+      <input
+        type="text"
+        id="suffix"
+        name="suffix"
+        class="form-control"
+        ng-model="classData.suffix"
+        ng-change="validateSuffix()"
+        placeholder="Ví dụ: A, B1..."
+        maxlength="10" pattern="^[A-Za-z][A-Za-z0-9]*$" required
+      />
+      <div class="form-text text-muted">
+        Bắt đầu bằng chữ cái, chứa chữ/số, tối đa 10 ký tự
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <a href="#!/classes" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Quay lại
+      </a>
+      <button type="submit" class="btn btn-primary" ng-disabled="classForm.$invalid">
+        <i class="fa-solid fa-save"></i> Lưu
+      </button>
+    </div>
+  </form>
+</div>

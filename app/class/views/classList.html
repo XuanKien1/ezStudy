@@ -1,0 +1,54 @@
+<div class="container">
+  <h2><i class="fa-solid fa-layer-group"></i> Danh sách lớp học</h2>
+
+  <div class="d-flex justify-content-between flex-wrap mb-3">
+    <div>
+      <label class="fw-semibold"><i class="fa fa-filter me-1"></i> Lọc theo khối:</label>
+      <div class="d-flex flex-wrap gap-2 mt-2">
+        <div class="form-check" ng-repeat="grade in [1,2,3,4,5,6,7,8,9,10,11,12]" style="width:80px;">
+          <input type="checkbox" class="form-check-input" id="g{{grade}}" ng-model="gradeSelections[grade]" ng-change="filterByGrade()">
+          <label for="g{{grade}}" class="form-check-label">Khối {{grade}}</label>
+        </div>
+        <button class="btn btn-outline-danger btn-sm" ng-click="clearAllGrades()">
+          <i class="fa fa-times"></i> Bỏ lọc
+        </button>
+      </div>
+    </div>
+    <a href="#!/classes/form" class="btn btn-primary mt-2 mt-md-0">
+      <i class="fa fa-plus"></i> Thêm lớp học
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped align-middle" style="min-width:600px;">
+    <thead class="table-light">
+      <tr><th class="text-center" style="width:5%">#</th><th style="width:55%">Tên lớp</th><th class="text-center" style="width:40%">Thao tác</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="group in paginatedGroupedClasses()">
+        <td colspan="3" class="fw-bold table-secondary">Khối {{group.grade}}</td>
+      </tr>
+      <tr ng-repeat="cls in group.classes">
+        <td class="text-center">{{$index + 1}}</td>
+        <td>{{cls.name}}</td>
+        <td class="text-center">
+          <a href="#!/classes/form/{{cls.id}}" class="btn btn-sm btn-outline-primary me-2">
+            <i class="fa fa-edit"></i> Sửa
+          </a>
+          <button class="btn btn-sm btn-outline-danger" ng-click="deleteClass(cls.id)">
+            <i class="fa fa-trash"></i> Xóa
+          </button>
+        </td>
+      </tr>
+      <tr ng-repeat-end></tr>
+      <tr ng-if="filteredGroupedClasses.length === 0">
+        <td colspan="3" class="text-center text-muted">Không có lớp nào.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center my-3">
+    <button class="btn btn-secondary me-2" ng-disabled="currentPage === 0" ng-click="prevPage()">← Trang trước</button>
+    <span>Trang {{currentPage + 1}} / {{totalPages()}}</span>
+    <button class="btn btn-secondary ms-2" ng-disabled="currentPage >= totalPages() - 1" ng-click="nextPage()">Trang sau →</button>
+  </div>
+</div>
