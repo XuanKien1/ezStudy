@@ -20,7 +20,11 @@
 
         <div class="form-group mb-4">
           <label>Lớp:</label>
-          <input type="text" class="form-control" ng-model="student.className" ng-change="convertClassNameToUpper()" placeholder="Nhập lớp" required />
+          <select id="classSelect" class="form-select" ng-model="student.className" required>
+            <optgroup ng-repeat="g in groupedClasses" label="Khối {{g.grade}}">
+              <option ng-repeat="cls in g.classes" value="{{cls.name}}">{{cls.name}}</option>
+            </optgroup>
+          </select>
         </div>
 
         <div class="text-end">

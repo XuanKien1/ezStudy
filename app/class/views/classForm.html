@@ -5,38 +5,49 @@
   </h2>
 
   <form name="classForm" ng-submit="save()" novalidate>
+    <!-- Khối -->
     <div class="mb-3">
       <label for="grade" class="form-label">Khối:</label>
       <input
-        type="number"
+        type="text"
         id="grade"
         name="grade"
         class="form-control"
         ng-model="classData.grade"
-        ng-change="validateGrade()"
+        ng-blur="validateGrade(true)"
+        ng-keypress="$event.keyCode === 13 && validateGrade(true)"
         placeholder="Nhập số từ 1–12"
-        min="1" max="12" required
+        inputmode="numeric"
         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        required
       />
     </div>
 
+    <!-- Tên lớp -->
     <div class="mb-3">
-      <label for="suffix" class="form-label">Hậu tố:</label>
-      <input
-        type="text"
-        id="suffix"
-        name="suffix"
-        class="form-control"
-        ng-model="classData.suffix"
-        ng-change="validateSuffix()"
-        placeholder="Ví dụ: A, B1..."
-        maxlength="10" pattern="^[A-Za-z][A-Za-z0-9]*$" required
-      />
-      <div class="form-text text-muted">
-        Bắt đầu bằng chữ cái, chứa chữ/số, tối đa 10 ký tự
+      <label for="suffix" class="form-label">Tên lớp:</label>
+      <div class="input-group">
+        <span class="input-group-text">{{ classData.grade || '' }}</span>
+        <input
+          type="text"
+          id="suffix"
+          name="suffix"
+          class="form-control"
+          ng-model="classData.suffix"
+          ng-keypress="preventInvalidKey($event)"
+          ng-input="handleSuffixInput()"
+          ng-change="handleSuffixInput()"
+          placeholder="Nhập hậu tố (ví dụ: A, B1...)"
+          maxlength="10"
+          required
+        />
+      </div>
+      <div class="form-text">
+        Tên lớp sẽ là: <strong>{{ classData.grade || '' }}{{ classData.suffix || '' }}</strong>
       </div>
     </div>
 
+    <!-- Nút -->
     <div class="d-flex justify-content-end gap-2 mt-4">
       <a href="#!/classes" class="btn btn-secondary">
         <i class="fa-solid fa-arrow-left"></i> Quay lại
