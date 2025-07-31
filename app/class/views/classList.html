@@ -1,37 +1,8 @@
 <div class="container">
   <h2 class="mb-4"><i class="fa-solid fa-layer-group"></i> Danh sách lớp học</h2>
 
-  <!-- Bộ lọc + nút thêm lớp học -->
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="d-flex flex-column gap-2">
-      <label class="fw-semibold"><i class="fa fa-filter me-1"></i> Lọc theo khối:</label>
-
-      <!-- Hàng 1 -->
-      <div class="d-flex align-items-center mb-1">
-        <div class="form-check me-3 mb-2"
-             ng-repeat="grade in [1,2,3,4,5,6]" style="width:90px;">
-          <input type="checkbox" class="form-check-input" id="g{{grade}}" 
-                 ng-model="gradeSelections[grade]" ng-change="filterByGrade()">
-          <label for="g{{grade}}" class="form-check-label">Khối {{grade}}</label>
-        </div>
-        <!-- Nút bỏ lọc -->
-        <button class="btn btn-outline-danger btn-lg ms-2" ng-click="clearAllGrades()">
-          <i class="fa fa-times"></i> Bỏ lọc
-        </button>
-      </div>
-
-      <!-- Hàng 2 -->
-      <div class="d-flex align-items-center">
-        <div class="form-check me-3 mb-2"
-             ng-repeat="grade in [7,8,9,10,11,12]" style="width:90px;">
-          <input type="checkbox" class="form-check-input" id="g{{grade}}" 
-                 ng-model="gradeSelections[grade]" ng-change="filterByGrade()">
-          <label for="g{{grade}}" class="form-check-label">Khối {{grade}}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Nút thêm lớp học: sát cột thao tác -->
+  <!-- Nút thêm lớp học -->
+  <div class="d-flex justify-content-end align-items-center mb-3">
     <a href="#!/classes/form" class="btn btn-primary">
       + Thêm lớp học
     </a>
